@@ -1,0 +1,45 @@
+openapi: 3.0.1
+info:
+  title: Adyen POS Mock - Make a Payment
+  version: '1.0'
+  description: Mock implementation for the "Make a payment" TAPI endpoint (example)
+paths:
+  /payments:
+    post:
+      summary: Make a payment (mock)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                merchantReference:
+                  type: string
+                amount:
+                  type: object
+                  properties:
+                    currency:
+                      type: string
+                    value:
+                      type: integer
+                paymentMethod:
+                  type: object
+              required:
+                - merchantReference
+                - amount
+      responses:
+        '200':
+          description: Successful (mocked) payment response
+          content:
+            application/json:
+              example:
+                pspReference: MOCK-123456789
+                resultCode: Authorised
+                merchantReference: order-0001
+                amount:
+                  currency: EUR
+                  value: 1000
+                paymentMethod:
+                  type: card
+                authCode: MOCKAUTH
